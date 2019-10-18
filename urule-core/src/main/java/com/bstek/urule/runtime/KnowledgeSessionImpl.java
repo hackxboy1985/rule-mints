@@ -437,6 +437,10 @@ public class KnowledgeSessionImpl implements KnowledgeSession{
 				allVariableCateogoryMap.putAll(knowledgePackage.getVariableCateogoryMap());
 			}
 		}
+		//TODO:修复拷贝时经常出现的空格问题
+		for (Map.Entry<String,String> entry: allVariableCateogoryMap.entrySet()){
+			entry.setValue(entry.getValue().trim());
+		}
 		context = new ContextImpl(this,Utils.getApplicationContext(),allVariableCateogoryMap,debugMessageItems);
 		evaluationContext=new EvaluationContextImpl(this,Utils.getApplicationContext(),allVariableCateogoryMap,debugMessageItems);
 		flowContext=new FlowContextImpl(this,allVariableCateogoryMap,Utils.getApplicationContext(),debugMessageItems);

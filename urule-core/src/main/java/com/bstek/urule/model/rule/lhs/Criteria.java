@@ -105,7 +105,8 @@ public class Criteria extends BaseCriterion implements BaseCriteria{
 			String valueId=value.getId();
 			if(context.partValueExist(valueId)){
 				right=context.getPartValue(valueId);
-			}else{				
+				response.setRightResult(right);
+			}else{
 				right=valueCompute.complexValueCompute(value,obj,context,allMatchedObjects,null);
 				response.setRightResult(right);
 				context.storePartValue(valueId, right);
