@@ -62,6 +62,9 @@ public class Criteria extends BaseCriterion implements BaseCriteria{
 					throw new RuleException("Criteria left[variableName] can not be null.");
 				}
 				leftValue=Utils.getObjectProperty(obj, varPart.getVariableName());
+				if (leftValue == null){
+					System.out.println("!!!获取参数值异常[" + varPart.getId() + "] is null!!!" );
+				}
 			}else{
 				if(leftPart instanceof MethodLeftPart){
 					MethodLeftPart methodPart=(MethodLeftPart)leftPart;

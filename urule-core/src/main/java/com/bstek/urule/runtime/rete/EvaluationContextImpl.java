@@ -63,7 +63,9 @@ public class EvaluationContextImpl extends ContextImpl implements EvaluationCont
 	}
 	@Override
 	public void storePartValue(String id, Object obj) {
-		partValueMap.put(id, obj);
+		if (obj != null) {
+			partValueMap.put(id, obj);
+		}
 	}
 	
 	@Override

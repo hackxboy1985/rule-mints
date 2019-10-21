@@ -54,8 +54,11 @@ public class ObjectTypeActivity extends AbstractActivity {
 			}
 		}else if(typeClass!=null){
 			Class<?> c=object.getClass();
-			if(typeClass.isAssignableFrom(c) || typeClass.getName().equals(c.getName())){
-				return true;				
+			//TODO:因GeneralInputEntity和GeneralOutputEntity都是继承自Map,所以在判断参数时，如果使用isAssignableFrom，
+			//TODO:可能将input或output当做参数返回，导致取错值，主要是不想实现每个具体的fact类，统一使用GeneralInputEntity和GeneralOutputEntity做为输入、输出变量
+//			if(typeClass.isAssignableFrom(c) || typeClass.getName().equals(c.getName())){
+			if(typeClass.getName().equals(c.getName())){
+				return true;
 			}
 		}
 		return false;

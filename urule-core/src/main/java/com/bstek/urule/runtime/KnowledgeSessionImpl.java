@@ -29,6 +29,8 @@ import com.bstek.urule.Utils;
 import com.bstek.urule.debug.DebugWriter;
 import com.bstek.urule.debug.MessageItem;
 import com.bstek.urule.model.GeneralEntity;
+import com.bstek.urule.model.GeneralInputEntity;
+import com.bstek.urule.model.GeneralOutputEntity;
 import com.bstek.urule.model.flow.FlowDefinition;
 import com.bstek.urule.model.flow.ins.FlowContextImpl;
 import com.bstek.urule.model.flow.ins.ProcessInstance;
@@ -292,7 +294,9 @@ public class KnowledgeSessionImpl implements KnowledgeSession{
 	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean insert(Object fact){
-		if(!(fact instanceof GeneralEntity) && (fact instanceof Map)){
+		//TODO:增加对Inout、Output对象做为因子插入，而不将其做为map对象插入
+		if(!(fact instanceof GeneralEntity) && !(fact instanceof GeneralInputEntity) && !(fact instanceof GeneralOutputEntity) && (fact instanceof Map)){
+//		if(!(fact instanceof GeneralEntity) && (fact instanceof Map)){
 			Map<?,?> map=(Map)fact;
 			factMaps.add(map);
 		}else if(!facts.contains(fact)){
