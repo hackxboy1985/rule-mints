@@ -11,6 +11,7 @@ import com.bstek.urule.runtime.KnowledgeSessionFactory;
 import com.bstek.urule.runtime.response.FlowExecutionResponse;
 import com.bstek.urule.runtime.response.RuleExecutionResponse;
 import com.bstek.urule.runtime.service.KnowledgeService;
+import com.bstek.urule.springboot.utils.JSONFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -102,7 +103,7 @@ public class RuleTest {
 		//List<Object> allFacts = session.getAllFacts();
         Map<String, Object> parameters = session.getParameters();
         result.put("result", parameters);
-        return JSONObject.toJSONString(result,true);
+        return JSONFormat.formatJsonhtml(JSONObject.toJSONString(result,true));
 
 //		String s = JSONObject.toJSONString(ruleExecutionResponse.getMatchedRules(),true);
 //		return JSONFormat.formatJsonhtml(s);
