@@ -11,3 +11,5 @@ urule:
   repository:
     databasetype: mysql
     datasourcename: datasource
+  debugToFile: true
+  defaultHtmlFileDebugPath: /opt/app/repo

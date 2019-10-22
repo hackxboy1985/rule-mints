@@ -99,11 +99,14 @@ public class RuleTest {
         result.put("matchedRules", matchedRules);
 
 
-        session.writeLogFile();
-		//List<Object> allFacts = session.getAllFacts();
-        Map<String, Object> parameters = session.getParameters();
-        result.put("result", parameters);
-        return JSONFormat.formatJsonhtml(JSONObject.toJSONString(result,true));
+        //session.writeLogFile();
+        String logHtml = session.printLogHtml();
+        return logHtml;
+
+        //List<Object> allFacts = session.getAllFacts();
+//        Map<String, Object> parameters = session.getParameters();
+//        result.put("result", parameters);
+//        return JSONFormat.formatJsonhtml(JSONObject.toJSONString(result,true));
 
 //		String s = JSONObject.toJSONString(ruleExecutionResponse.getMatchedRules(),true);
 //		return JSONFormat.formatJsonhtml(s);

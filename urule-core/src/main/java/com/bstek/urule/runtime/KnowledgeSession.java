@@ -102,4 +102,11 @@ public interface KnowledgeSession extends WorkingMemory{
 	 * @throws IOException 抛出IO异常
 	 */
 	void writeLogFile() throws IOException;
+
+
+	/**
+	 * 执行将日志信息变成html脚本字符串返回
+	 * @return
+	 */
+	String printLogHtml() ;
 }

@@ -362,6 +362,25 @@ public class KnowledgeSessionImpl implements KnowledgeSession{
 		}
 		debugMessageItems.clear();
 	}
+
+	@Override
+	public String printLogHtml(){
+		if(debugMessageItems.size()==0){
+			return "";
+		}
+
+		StringBuilder msg=new StringBuilder();
+		for(MessageItem item:debugMessageItems){
+			msg.append(item.toHtml());
+		}
+		StringBuilder sb=new StringBuilder();
+		sb.append("<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>URule调试日志信息</title><body style='font-size:12px'>");
+		sb.append(msg.toString());
+		sb.append("</body></html>");
+
+		debugMessageItems.clear();
+		return sb.toString();
+	}
 	
 	public List<Object> getAllFacts() {
 		return facts;
