@@ -106,7 +106,7 @@ public interface KnowledgeSession extends WorkingMemory{
 
 	/**
 	 * 执行将日志信息变成html脚本字符串返回
-	 * @return
+	 * @return 运回html格式的日志字符串
 	 */
 	String printLogHtml() ;
 }

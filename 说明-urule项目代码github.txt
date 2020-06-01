@@ -1,0 +1,12 @@
+1、world.sql为数据库表结构
+
+2、启动springboot项目后，打开http://localhost:8009/urule/frame### 访问
+
+3、测试，参考springboot项目RuleTest.java
+1）、获取项目下的知识包，例:test/com.test, 代表test项目下的知识包中的com.test的规则
+
+
+
+4、查看日志
+控制台会打印出ConsoleKey，将值设置到以下链接，可在线看日志
+http://localhost:8009/urule/console/html/console.html?key=2
