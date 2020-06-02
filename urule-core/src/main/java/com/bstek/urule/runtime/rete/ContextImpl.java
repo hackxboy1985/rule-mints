@@ -18,6 +18,7 @@ package com.bstek.urule.runtime.rete;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.ApplicationContext;
@@ -34,6 +35,8 @@ import com.bstek.urule.runtime.assertor.AssertorEvaluator;
  * @since 2015年1月8日
  */
 public class ContextImpl implements Context {
+	private Logger log=Logger.getLogger(ContextImpl.class.getName());
+
 	private ApplicationContext applicationContext;
 	private AssertorEvaluator assertorEvaluator;
 	private Map<String,String> variableCategoryMap;
@@ -72,8 +75,9 @@ public class ContextImpl implements Context {
 			return;
 		}
 		if(!Utils.isDebugToFile()){
-			System.out.println(msg);
-			return;
+//			System.out.println(msg);
+			log.info(msg);
+//			return;
 		}
 		MessageItem item=new MessageItem(msg,type);
 		debugMessageItems.add(item);		

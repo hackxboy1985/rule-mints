@@ -4,9 +4,40 @@
 
 3、测试，参考springboot项目RuleTest.java
 1）、获取项目下的知识包，例:test/com.test, 代表test项目下的知识包中的com.test的规则
+2）、插入入参因子session.insert(user);
+3）、执行规则session.fireRules();
+4）、返回参数session.getParameters();所有的执行结果应该放到parameters中。
+
+重要：测试时发现RuleTest.java中testrule()方法执行异常，而testflow()执行成功，原因可能在于testrule()方法中使用HashMap做为入参因子，
+而testflow()使用GeneralInputEntity做入参因子,现行代码中testrule()已经修改为使用GeneralInputEntity做入参因子
+参数说明：insert的参数一定要是GeneralInputEntity，且在编辑后台定义变量的类路径时，一定要是com.bstek.urule.model.GeneralInputEntity，
+否则会出现入参的类型不一致，
 
 
+4、规则备份目录
+test 为对应RuleTest.java中的testrule()方法的规则.
+test2为对应RuleTest.java中的testflow()方法的决策流.
 
-4、查看日志
+4、查看日志,application.yml中配置 debugToFile: false
 控制台会打印出ConsoleKey，将值设置到以下链接，可在线看日志
 http://localhost:8009/urule/console/html/console.html?key=2
+
+查看KnowledgeSession.java接口中此方法
+	/**
+	 * 执行将日志信息写入到日志文件操作，要看到日志文件我们需要设置urule.debugToFile属性值为true，<br>
+	 * 同时定义输出文件目录属性urule.defaultHtmlFileDebugPath，这样在urule.debug属性为true情况下就会向这个目录下写入日志文件,<br>
+	 * 需要的时候，可以通过实现com.bstek.urule.debug.DebugWriter接口定义自己的日志输出文件，这样就可以将日志输出到任何地方
+	 * @throws IOException 抛出IO异常
+	 */
+	void writeLogFile() throws IOException;
+
+
+5、Rule说明:
+if      lhs
+then    rhs
+else    other
+即lhs(left hands)代表条件，rhs(right hands)代表条件成立时的逻辑，other代表条件不成立时的逻辑
+
+
+6、整个知识包的执行由KnowledgeSessionImpl.execute()方法开始执行
+rhs由ActivationImpl.execute()方法执行

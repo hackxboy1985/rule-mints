@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 变量分类，例：输入变量库：名称：user，类路径:com.bstek.urule.model.GeneralInputEntity
  * @author Jacky.gao
  * @since 2014年12月23日
  */

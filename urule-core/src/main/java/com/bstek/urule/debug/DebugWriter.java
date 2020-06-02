@@ -24,5 +24,7 @@ import java.util.List;
  * @since 2017年11月27日
  */
 public interface DebugWriter {
-	void write(List<MessageItem> items) throws IOException;
+	String getConsoleKey() throws IOException;
+
+	void write(String key,List<MessageItem> items) throws IOException;
 }

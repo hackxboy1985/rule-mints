@@ -14,8 +14,19 @@ import org.apache.commons.lang.StringUtils;
  */
 public class DefaultHtmlFileDebugWriter implements DebugWriter{
 	private String path;
+
+	public String getConsoleKey(){
+//		return debugMessageHolder.generateKey();
+		return null;
+	}
+
+	/**
+	 * 可扩展增加个接口，根据
+	 * @param items
+	 * @throws IOException
+	 */
 	@Override
-	public void write(List<MessageItem> items) throws IOException{
+	public void write(String key,List<MessageItem> items) throws IOException{
 		if(StringUtils.isBlank(path)){
 			return;
 		}
@@ -23,7 +34,7 @@ public class DefaultHtmlFileDebugWriter implements DebugWriter{
 		for(MessageItem item:items){
 			msg.append(item.toHtml());
 		}
-		String fullPath=path+"/urule-debug.html";
+		String fullPath=path+"/"+key+".html";
 		StringBuilder sb=new StringBuilder();
 		sb.append("<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>URule调试日志信息</title><body style='font-size:12px'>");
 		sb.append(msg.toString());

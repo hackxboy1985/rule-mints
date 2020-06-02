@@ -17,6 +17,7 @@ package com.bstek.urule.console.servlet.console;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.bstek.urule.debug.DebugWriter;
 import com.bstek.urule.debug.MessageItem;
@@ -26,15 +27,23 @@ import com.bstek.urule.debug.MessageItem;
  * @since 2017年11月28日
  */
 public class ConsoleDebugWriter implements DebugWriter {
+	private Logger log=Logger.getLogger(ConsoleDebugWriter.class.getName());
+
 	private DebugMessageHolder debugMessageHolder;
+
+	public String getConsoleKey(){
+		return debugMessageHolder.generateKey();
+	}
+
 	@Override
-	public void write(List<MessageItem> items) throws IOException {
+	public void write(String key, List<MessageItem> items) throws IOException {
 		StringBuilder sb=new StringBuilder();
 		for(MessageItem item:items){
 			sb.append(item.toHtml());
 		}
-		String key=debugMessageHolder.generateKey();
-		System.out.println("Console key : "+key);
+//		String key=debugMessageHolder.generateKey();
+		log.info("日志查看keyConsole key : "+key);
+//		System.out.println("Console key : "+key);
 		debugMessageHolder.putDebugMessage(key, sb.toString());
 	}
 	public void setDebugMessageHolder(DebugMessageHolder debugMessageHolder) {

@@ -65,6 +65,7 @@ import com.bstek.urule.runtime.rete.ContextImpl;
 import com.bstek.urule.runtime.rete.EvaluationContextImpl;
 import com.bstek.urule.runtime.rete.FactTracker;
 import com.bstek.urule.runtime.rete.ReteInstance;
+import org.springframework.util.StringUtils;
 
 /**
  * @author Jacky.gao
@@ -357,8 +358,20 @@ public class KnowledgeSessionImpl implements KnowledgeSession{
 		if(debugMessageItems.size()==0){
 			return;
 		}
+
+		//TODO:获得requestId，并设置到参数返回，以进行查询日志
+		String requestId = (String)parameterMap.get("requestId");
+		if (StringUtils.isEmpty(requestId)) {
+			for (DebugWriter writer : Utils.getDebugWriters()) {
+				if (StringUtils.isEmpty(requestId)) {
+					requestId = writer.getConsoleKey();
+				}
+			}
+			parameterMap.put("requestId", requestId);
+		}
+
 		for(DebugWriter writer:Utils.getDebugWriters()){
-			writer.write(debugMessageItems);
+			writer.write(requestId,debugMessageItems);
 		}
 		debugMessageItems.clear();
 	}

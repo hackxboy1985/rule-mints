@@ -11,5 +11,6 @@ urule:
   repository:
     databasetype: mysql
     datasourcename: datasource
-  debugToFile: true
-  defaultHtmlFileDebugPath: /opt/app/repo
+  debugToFile: false
+  defaultHtmlFileDebugPath: /opt/app/repo1
+  htmlLogRemainTimeMintues: 5 #html日志保留时间
