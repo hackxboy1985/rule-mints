@@ -74,11 +74,12 @@ public class ContextImpl implements Context {
 		if(!Utils.isDebug() || !enableDebug){
 			return;
 		}
-		if(!Utils.isDebugToFile()){
+		log.info(msg);
+//		if(!Utils.isDebugToFile()){
 //			System.out.println(msg);
-			log.info(msg);
 //			return;
-		}
+//		}
+
 		MessageItem item=new MessageItem(msg,type);
 		debugMessageItems.add(item);		
 	}

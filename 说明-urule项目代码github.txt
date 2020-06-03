@@ -11,15 +11,16 @@
 重要：测试时发现RuleTest.java中testrule()方法执行异常，而testflow()执行成功，原因可能在于testrule()方法中使用HashMap做为入参因子，
 而testflow()使用GeneralInputEntity做入参因子,现行代码中testrule()已经修改为使用GeneralInputEntity做入参因子
 参数说明：insert的参数一定要是GeneralInputEntity，且在编辑后台定义变量的类路径时，一定要是com.bstek.urule.model.GeneralInputEntity，
-否则会出现入参的类型不一致，
+否则会出现入参的类型不一致.
 
 
 4、规则备份目录
 test 为对应RuleTest.java中的testrule()方法的规则.
 test2为对应RuleTest.java中的testflow()方法的决策流.
 
-4、查看日志,application.yml中配置 debugToFile: false
-控制台会打印出ConsoleKey，将值设置到以下链接，可在线看日志
+
+5、查看日志,application.yml中配置 debugToFile: false, 现已修改，使该配置已失效，无论如何都会打印至日志文件,参见ContextImpl.java的debugMsg()方法.
+另外日志会打印出ConsoleKey，将值设置到以下链接，可在线看日志，有效期默认3分钟
 http://localhost:8009/urule/console/html/console.html?key=2
 
 查看KnowledgeSession.java接口中此方法
@@ -32,12 +33,14 @@ http://localhost:8009/urule/console/html/console.html?key=2
 	void writeLogFile() throws IOException;
 
 
-5、Rule说明:
+6、Rule说明:
 if      lhs
 then    rhs
 else    other
 即lhs(left hands)代表条件，rhs(right hands)代表条件成立时的逻辑，other代表条件不成立时的逻辑
 
 
-6、整个知识包的执行由KnowledgeSessionImpl.execute()方法开始执行
+7、整个知识包的执行由KnowledgeSessionImpl.execute()方法开始执行
 rhs由ActivationImpl.execute()方法执行
+
+

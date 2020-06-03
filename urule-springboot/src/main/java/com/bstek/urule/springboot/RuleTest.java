@@ -30,17 +30,24 @@ public class RuleTest {
 	@Autowired
 	private KnowledgeService service;
 
+    /**
+     * 测试单个规则
+     * @return
+     * @throws Exception
+     */
 	@RequestMapping("/test")
 	@ResponseBody
-	public String test() throws Exception{
+	public String testrule() throws Exception{
 		//KnowledgePackage knowledgePackage=service.getKnowledge("3dxt-CXB/test");
+        //1、获取项目下的知识包
 		KnowledgePackage knowledgePackage=service.getKnowledge("test/com.test");
         KnowledgeSession session= KnowledgeSessionFactory.newKnowledgeSession(knowledgePackage);
 
-		HashMap<String,Object> user = new HashMap<>();
+//		HashMap<String,Object> user = new HashMap<>();
+        GeneralInputEntity user = new GeneralInputEntity();
 		user.put("name","zs");
 		user.put("age", 17);
-		user.put("auditResult","");
+//		user.put("auditResult","");
 		//user.put("level","");
 		session.insert(user);
 
@@ -58,6 +65,11 @@ public class RuleTest {
 //		return JSONFormat.formatJsonhtml(s);
 	}
 
+    /**
+     * 测试规则流
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/testflow")
     @ResponseBody
     public String testflow() throws Exception{
@@ -99,14 +111,16 @@ public class RuleTest {
         result.put("matchedRules", matchedRules);
 
 
-        //session.writeLogFile();
-        String logHtml = session.printLogHtml();
-        return logHtml;
+        session.writeLogFile();
+//        String logHtml = session.printLogHtml();
+//        return logHtml;
+//        Map<String, Object> parameters = session.getParameters();
+//        return JSONObject.toJSONString(parameters);
 
         //List<Object> allFacts = session.getAllFacts();
-//        Map<String, Object> parameters = session.getParameters();
-//        result.put("result", parameters);
-//        return JSONFormat.formatJsonhtml(JSONObject.toJSONString(result,true));
+        Map<String, Object> parameters = session.getParameters();
+        result.put("result", parameters);
+        return JSONFormat.formatJsonhtml(JSONObject.toJSONString(result,true));
 
 //		String s = JSONObject.toJSONString(ruleExecutionResponse.getMatchedRules(),true);
 //		return JSONFormat.formatJsonhtml(s);
